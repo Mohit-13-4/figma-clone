@@ -5,39 +5,51 @@ import { Button } from "@/components/ui/button";
 const Pricing = () => {
   const plans = [
     {
-      name: "BASIC",
+      name: "FREE",
       price: "0",
-      period: "Forever",
-      description: "Perfect for testing the waters",
+      period: "Per Month",
+      description: "Organize across all apps by hand",
       features: [
-        "1 Website", "5 GB Hosting", "Limited Support"
+        "Pricing Feature",
+        "Pricing Feature", 
+        "Pricing Feature",
+        "Pricing Feature",
+        "Pricing Feature"
       ],
-      buttonText: "Get Started",
-      buttonVariant: "outline" as const,
+      buttonText: "Order Now",
+      buttonVariant: "default" as const,
       popular: false
     },
     {
-      name: "STANDARD",
+      name: "STANDARD", 
       price: "10",
       period: "Per Month",
-      description: "Perfect for small teams",
+      description: "Organize across all apps by hand",
       features: [
-        "5 Websites", "25 GB Hosting", "Premium Support", "Webmail Support"
+        "Pricing Feature",
+        "Pricing Feature",
+        "Pricing Feature", 
+        "Pricing Feature",
+        "Pricing Feature"
       ],
-      buttonText: "Get Started",
-      buttonVariant: "default" as const,
+      buttonText: "Order Now",
+      buttonVariant: "outline" as const,
       popular: true
     },
     {
-      name: "PREMIUM",
-      price: "99",
-      period: "Per Month", 
-      description: "Perfect for large teams",
+      name: "BUSINESS",
+      price: "99", 
+      period: "Per Month",
+      description: "Organize across all apps by hand",
       features: [
-        "Unlimited Websites", "Unlimited Hosting", "Premium Support"
+        "Pricing Feature",
+        "Pricing Feature",
+        "Pricing Feature",
+        "Pricing Feature", 
+        "Pricing Feature"
       ],
-      buttonText: "Get Started",
-      buttonVariant: "outline" as const,
+      buttonText: "Order Now",
+      buttonVariant: "default" as const,
       popular: false
     }
   ];
@@ -46,9 +58,10 @@ const Pricing = () => {
     <section className="py-20 bg-slate-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Pricing</h2>
-          <p className="text-xl text-gray-300">
-            Most calendars are designed for teams. State is designed for freelancers.
+          <h2 className="text-5xl font-bold text-white mb-6">Pricing</h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Most calendars are designed for teams.<br />
+            Slate is designed for freelancers
           </p>
         </div>
         
@@ -56,40 +69,46 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`relative bg-white rounded-lg p-8 text-center ${
-                plan.popular ? 'ring-2 ring-blue-500 scale-105' : ''
+              className={`relative rounded-lg p-8 text-center ${
+                plan.popular 
+                  ? 'bg-blue-500 text-white scale-105' 
+                  : 'bg-white text-gray-900'
               }`}
             >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                    MOST POPULAR
-                  </span>
+              <h3 className="text-2xl font-bold mb-6">{plan.name}</h3>
+              <p className={`mb-6 ${plan.popular ? 'text-blue-100' : 'text-gray-600'}`}>
+                {plan.description}
+              </p>
+              
+              <div className="mb-8">
+                <div className="flex items-baseline justify-center mb-2">
+                  <span className="text-6xl font-bold">{plan.price}</span>
+                  <span className="text-2xl ml-2">$</span>
                 </div>
-              )}
-              
-              <h3 className="text-lg font-bold text-gray-900 mb-4">{plan.name}</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
-                <span className="text-gray-600 ml-2">{plan.period}</span>
+                <span className={`${plan.popular ? 'text-blue-100' : 'text-gray-600'}`}>
+                  {plan.period}
+                </span>
               </div>
-              <p className="text-gray-600 mb-8">{plan.description}</p>
               
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-4 mb-8">
                 {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center justify-center text-gray-700">
-                    <Check className="w-5 h-5 text-green-500 mr-2" />
-                    {feature}
+                  <li key={featureIndex} className="flex items-center justify-center">
+                    <Check className={`w-5 h-5 mr-3 ${
+                      plan.popular ? 'text-white' : 'text-green-500'
+                    }`} />
+                    <span className={plan.popular ? 'text-white' : 'text-gray-700'}>
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
               
               <Button 
-                variant={plan.buttonVariant}
-                className={`w-full ${
-                  plan.buttonVariant === 'default' 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                    : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                variant={plan.popular ? "outline" : "default"}
+                className={`w-full rounded-full py-6 text-lg font-semibold ${
+                  plan.popular 
+                    ? 'bg-white text-blue-500 hover:bg-gray-50 border-2 border-white'
+                    : 'bg-blue-500 hover:bg-blue-600 text-white'
                 }`}
               >
                 {plan.buttonText}

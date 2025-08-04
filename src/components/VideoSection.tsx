@@ -1,44 +1,47 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const VideoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className="py-20 bg-gradient-to-r from-orange-50 to-red-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Fastest way to<br />organize
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Most calendars are designed for teams. State is designed for freelancers.
-            </p>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              Learn More
-            </Button>
-          </div>
-          
-          <div className="relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative mb-16">
             <div className="relative bg-gray-100 rounded-lg overflow-hidden aspect-video">
-              {!isPlaying ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600">
+              <img 
+                src="/lovable-uploads/4500db75-8ed1-4cd2-be8a-2aba7d516ece.png" 
+                alt="Video thumbnail"
+                className="w-full h-full object-cover"
+              />
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center">
                   <button
                     onClick={() => setIsPlaying(true)}
-                    className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                    className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors shadow-lg"
                   >
-                    <Play className="w-8 h-8 text-white ml-1" />
+                    <Play className="w-8 h-8 text-white ml-1" fill="white" />
                   </button>
                 </div>
-              ) : (
-                <div className="w-full h-full bg-gray-900 flex items-center justify-center">
-                  <p className="text-white">Video would play here</p>
+              )}
+              {isPlaying && (
+                <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
+                  <p className="text-white text-xl">Video would play here</p>
                 </div>
               )}
             </div>
+          </div>
+          
+          <div className="text-center">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+              Fastest way to<br />organize
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Most calendars are designed for teams.<br />
+              Slate is designed for freelancers
+            </p>
           </div>
         </div>
       </div>
