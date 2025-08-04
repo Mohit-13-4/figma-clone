@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { MapPin, Phone, Mail, Twitter, Facebook, Linkedin } from "lucide-react";
+import GoogleMap from "./GoogleMap";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -117,14 +118,8 @@ const Contact = () => {
               </div>
             </div>
             
-            {/* Map */}
-            <div className="h-80 bg-gray-300 rounded-lg overflow-hidden">
-              <img 
-                src="/lovable-uploads/ff519400-4cb3-43ae-a6f2-9ecffb7c2f18.png"
-                alt="Map location"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {/* Interactive Google Map */}
+            <GoogleMap className="h-80 rounded-lg overflow-hidden" />
             
             {/* Social Icons */}
             <div className="flex justify-center space-x-4">
