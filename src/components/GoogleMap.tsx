@@ -1,98 +1,22 @@
 
-import { useEffect, useRef, useState } from 'react';
-import { Loader } from '@googlemaps/js-api-loader';
-
 interface GoogleMapProps {
   className?: string;
 }
 
 const GoogleMap = ({ className }: GoogleMapProps) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [apiKey, setApiKey] = useState('');
-  const [showInput, setShowInput] = useState(true);
-
-  const loadMap = async (key: string) => {
-    if (!mapRef.current) return;
-
-    try {
-      const loader = new Loader({
-        apiKey: key,
-        version: 'weekly',
-        libraries: ['places']
-      });
-
-      const { Map } = await loader.importLibrary('maps');
-      const { Marker } = await loader.importLibrary('marker');
-
-      const map = new Map(mapRef.current, {
-        center: { lat: 33.7490, lng: -84.3880 }, // Atlanta, Georgia coordinates
-        zoom: 13,
-        mapTypeControl: false,
-        streetViewControl: false,
-      });
-
-      // Add marker for the address
-      new Marker({
-        position: { lat: 33.7490, lng: -84.3880 },
-        map: map,
-        title: '6386 Spring St, Anchorage, Georgia 12473 United States',
-      });
-
-      setShowInput(false);
-    } catch (error) {
-      console.error('Error loading Google Maps:', error);
-      alert('Error loading Google Maps. Please check your API key.');
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (apiKey.trim()) {
-      loadMap(apiKey.trim());
-    }
-  };
-
-  if (showInput) {
-    return (
-      <div className={`${className} flex flex-col items-center justify-center bg-gray-100 p-8`}>
-        <div className="text-center mb-6">
-          <h3 className="text-lg font-semibold mb-2">Google Maps Integration</h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Enter your Google Maps API key to load the interactive map
-          </p>
-          <p className="text-xs text-gray-500">
-            Get your API key from{' '}
-            <a
-              href="https://console.cloud.google.com/google/maps-apis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              Google Cloud Console
-            </a>
-          </p>
-        </div>
-        <form onSubmit={handleSubmit} className="w-full max-w-md">
-          <input
-            type="text"
-            placeholder="Enter Google Maps API Key"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg mb-4"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            Load Map
-          </button>
-        </form>
-      </div>
-    );
-  }
-
-  return <div ref={mapRef} className={className} />;
+  return (
+    <div className={className}>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0502083986537!2d85.31232901506143!3d27.707809932868887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb197b3f7d8f05%3A0x49cc26e0403c00a1!2sJosh%20Technology%20Group!5e0!3m2!1sen!2sin!4v1625653136972!5m2!1sen!2sin"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      />
+    </div>
+  );
 };
 
 export default GoogleMap;
